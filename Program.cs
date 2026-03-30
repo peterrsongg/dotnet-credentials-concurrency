@@ -51,6 +51,7 @@ for (int i = 0; i < concurrency; i++)
         }
         catch (Exception ex)
         {
+            Console.WriteLine("Task {Index}: FAILED - {Type}: {Message}", index, ex.GetType().Name, ex.Message);
             Log.Error(ex, "Task {Index}: FAILED - {Type}: {Message}", index, ex.GetType().Name, ex.Message);
             lock (errorLock) { errors.Add(ex); }
         }
