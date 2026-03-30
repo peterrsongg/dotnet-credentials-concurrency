@@ -4,10 +4,11 @@ using Amazon.S3.Model;
 using AWS.Logger;
 using AWS.Logger.SeriLog;
 using Serilog;
-using var s3Client = new AmazonS3Client(RegionEndpoint.USWest2);
-var bucketName = "dotnet-8554";
+using var s3Client = new AmazonS3Client(RegionEndpoint.USEast1);
+var logName = "dotnet-8554";
+var bucketName = "dotnet-8554--use1-az4--x-s3";
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.AWSSeriLog(new AWSLoggerConfig(bucketName))
+    .WriteTo.AWSSeriLog(new AWSLoggerConfig(logName))
     .CreateLogger();
 var tasks = Enumerable.Range(0, 64).Select(i => s3Client.PutObjectAsync(new PutObjectRequest
 {
