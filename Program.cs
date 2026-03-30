@@ -16,4 +16,11 @@ var tasks = Enumerable.Range(0, 256).Select(i => s3Client.PutObjectAsync(new Put
     ContentBody = "hello world",
     Key = $"{DateTime.UtcNow.Ticks}-{i}-test-key.txt"
 }));
-await Task.WhenAll(tasks);
+try
+{
+    await Task.WhenAll(tasks);
+}
+catch (Exception ex)
+{
+    Log.Error(ex, "One or more S3 uploads failed");
+}
