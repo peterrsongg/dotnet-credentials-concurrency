@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWS.Logger.SeriLog" Version="4.0.2" />
     <PackageReference Include="AWSSDK.S3" Version="4.0.19.4" />
   </ItemGroup>
 
