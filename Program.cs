@@ -10,7 +10,7 @@ var bucketName = "dotnet-8554--use1-az4--x-s3";
 Log.Logger = new LoggerConfiguration()
     .WriteTo.AWSSeriLog(new AWSLoggerConfig(logName))
     .CreateLogger();
-var tasks = Enumerable.Range(0, 64).Select(i => s3Client.PutObjectAsync(new PutObjectRequest
+var tasks = Enumerable.Range(0, 256).Select(i => s3Client.PutObjectAsync(new PutObjectRequest
 {
     BucketName = bucketName,
     ContentBody = "hello world",
