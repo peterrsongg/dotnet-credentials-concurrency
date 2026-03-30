@@ -10,17 +10,20 @@ var bucketName = "dotnet-8554--use1-az4--x-s3";
 Log.Logger = new LoggerConfiguration()
     .WriteTo.AWSSeriLog(new AWSLoggerConfig(logName))
     .CreateLogger();
-var tasks = Enumerable.Range(0, 256).Select(i => s3Client.PutObjectAsync(new PutObjectRequest
+for (int j = 0; j< 10; j++)
 {
-    BucketName = bucketName,
-    ContentBody = "hello world",
-    Key = $"{DateTime.UtcNow.Ticks}-{i}-test-key.txt"
-}));
-try
-{
-    await Task.WhenAll(tasks);
-}
-catch (Exception ex)
-{
-    Log.Error(ex, "One or more S3 uploads failed");
+    var tasks = Enumerable.Range(0, 256).Select(i => s3Client.PutObjectAsync(new PutObjectRequest
+    {
+        BucketName = bucketName,
+        ContentBody = "hello world",
+        Key = $"{DateTime.UtcNow.Ticks}-{i}-test-key.txt"
+    }));
+    try
+    {
+        await Task.WhenAll(tasks);
+    }
+    catch (Exception ex)
+    {
+        Log.Error(ex, "One or more S3 uploads failed");
+    } 
 }
